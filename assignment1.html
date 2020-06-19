@@ -1,0 +1,39 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item class="slds-box slds-m-around_x-small" size="4">
+            <lightning-input name="name" class="nameClass" label="Name:" type="text"></lightning-input>
+            <lightning-input name="records" class="recordsClass" label="Records #:" type="number"></lightning-input>
+            <br>
+            <lightning-button label="Search" onclick={handleClick}></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-box slds-m-around_x-small" size="9">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input name="filter" class="filterClass" label="Filter" placeholder="Filter Text" variant = "label-hidden" type="text"></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-button label="Filter Data" onclick={handleClickFilter}></lightning-button>
+                </div>    
+            </div>
+            <br>
+            <template if:true={myData}>
+                <lightning-layout multiple-rows="true">
+                    <template for:each={accountData} for:item="acc">
+                        <lightning-layout-item key={acc.Id} size="3" class="slds-box slds-m-around_x-small">
+                            {acc.Name}
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+            <template if:true={filterData}>
+                <lightning-layout multiple-rows="true">
+                    <template for:each={filterData} for:item="filtr">
+                        <lightning-layout-item size="3" class="slds-box slds-m-around_x-small" key={filtr.Id}>
+                            {filtr.Name}
+                        </lightning-layout-item>    
+                    </template>
+                </lightning-layout>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>
